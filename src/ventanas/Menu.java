@@ -12,14 +12,16 @@ import javax.swing.JTextField;
 
 public class Menu extends JFrame implements ActionListener,FocusListener {
 
-    JLabel lblRegistrar;
+    JLabel lblCampo;
+    JLabel lblRegistrar, lblRegisError;
     JTextField txtRegistrar;
     JButton btnGuardar;
     
     public Menu(){
     
        componentes();
-        
+       etiquetas();
+       
        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //termina el programa al salir de la ventana
        setLayout(null); // no hay plantilla a seguir
        setSize(600,800); // tamaño de la ventana
@@ -52,10 +54,7 @@ public class Menu extends JFrame implements ActionListener,FocusListener {
     }
     
     
-    
-    
-    
-    
+     
     
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -71,12 +70,40 @@ public class Menu extends JFrame implements ActionListener,FocusListener {
     @Override
     public void focusGained(FocusEvent e) {
 //        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-            if(e.getSource().equals(txtRegistrar)){}
+            if(e.getSource().equals(txtRegistrar)){
+            
+                lblCampo.setText("Se está editando el campo Registrar");
+            
+            }
     }
 
     @Override
     public void focusLost(FocusEvent e) {
+
+        lblRegisError.setText("");
+        if(e.getSource().equals(txtRegistrar)){
+        
+         if(txtRegistrar.getText().isEmpty()){
+            
+                lblRegisError.setText("Este campo no puede estar en blanco, no podrá guardar!!");
+            
+            }
+         }
 //        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    public void etiquetas(){
+        
+            lblCampo=new JLabel();
+            lblCampo.setLocation(30,30);
+            add(lblCampo);
+        
+            lblRegisError=new JLabel();
+            lblRegisError.setLocation(130, 70);
+            add(lblRegisError);
+    
+    }
+    
+    
     
 }
